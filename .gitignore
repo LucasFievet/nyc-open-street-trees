@@ -1,0 +1,52 @@
+# F# and .NET related files to ignore
+bin/
+obj/
+*.user
+*.userprefs
+*.suo
+*.cache
+*.nupkg
+*.[Cc]ache
+*.[Oo]bj
+*.[Bb]in
+*.[Ll]og
+*.[Ss]uo
+*.[Tt]mp
+*.[Vv]scode
+*.pidb
+*.svclog
+*.scc
+
+# Project files
+*.fsproj.user
+
+# MonoDevelop/Xamarin Studio project files
+*.userprefs
+
+# Rider
+.idea/
+
+# VS Code
+.vscode/
+.vs
+
+# Paket dependency manager
+.paket/paket.exe
+paket-files/
+
+# FAKE - F# Make
+.fake/
+
+# User-specific files
+*.rsuser
+
+# Ignore CSV files
+*.csv
+
+# Ignore SQLite database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Ignore all .DS_Store files
+.DS_Store
