@@ -16,8 +16,9 @@
 
   <ItemGroup>
     <PackageReference Update="FSharp.Core" Version="8.0.200" />
-    <PackageReference Include="Giraffe" Version="6.3.0" />
+    <PackageReference Include="Dapper" Version="2.1.35" />
 	<PackageReference Include="System.Data.SQLite" Version="1.0.118" />
+	<PackageReference Include="System.Text.Json" Version="8.0.3" />
   </ItemGroup>
 
 </Project>
