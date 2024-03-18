@@ -5,6 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+	<None Include="..\Data\street-trees.db" Link="street-trees.db">
+	  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</None>
     <Compile Include="Tree.fs" />
     <Compile Include="Controllers\TreeController.fs" />
     <Compile Include="Program.fs" />
@@ -17,6 +20,7 @@
   <ItemGroup>
     <PackageReference Update="FSharp.Core" Version="8.0.200" />
     <PackageReference Include="Dapper" Version="2.1.35" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
 	<PackageReference Include="System.Data.SQLite" Version="1.0.118" />
 	<PackageReference Include="System.Text.Json" Version="8.0.3" />
   </ItemGroup>

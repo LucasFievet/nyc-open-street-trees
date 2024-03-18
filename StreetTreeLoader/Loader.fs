@@ -109,6 +109,7 @@ let loadCsvIntoDatabase (csvFilePath: string) (conn: SQLiteConnection) =
 // Define the main function to execute the above-defined functions.
 [<EntryPoint>]
 let main argv =
+    // TODO: automate downloading the CSV file
     let csvFilePath = "2015StreetTreesCensus_TREES.csv"
     use conn = createConnection()
     createTable conn

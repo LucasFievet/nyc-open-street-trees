@@ -5,6 +5,7 @@ open Xunit.Abstractions
 open StreetTreeApi.Controllers
 open System.Text.Json
 
+// TODO: propoer dependency injection setup for unit tests with mocks where needed
 let jsonOptions = JsonSerializerOptions(PropertyNamingPolicy = JsonNamingPolicy.CamelCase)
 
 // Helper to deserialize JSON to a specific type
@@ -41,6 +42,7 @@ type HealthSummaryTests (output: ITestOutputHelper) =
         Assert.True(summary |> Seq.exists (fun item -> item.Health = "Good" && item.Count > 0))
         Assert.True(summary |> Seq.exists (fun item -> item.Health = "Fair" && item.Count > 0))
         Assert.True(summary |> Seq.exists (fun item -> item.Health = "Poor" && item.Count > 0))
+        // TODO: better assertions for the summary data
 
     // Test grouping by borough
     [<Fact>]
@@ -58,6 +60,7 @@ type HealthSummaryTests (output: ITestOutputHelper) =
 
         // Replace "SomeBorough" with actual borough names from your test data
         Assert.True(summary |> Seq.exists (fun item -> item.Boroname = "Bronx" && item.Health = "Good" && item.Count > 0))
+        // TODO: better assertions for the summary data
 
     // Test grouping by zipcode
     [<Fact>]
@@ -75,3 +78,4 @@ type HealthSummaryTests (output: ITestOutputHelper) =
 
         // Replace "SomeZipcode" with actual zip code values from your test data
         Assert.True(summary |> Seq.exists (fun item -> item.Zipcode = 10474 && item.Health = "Good" && item.Count > 0))
+        // TODO: better assertions for the summary data

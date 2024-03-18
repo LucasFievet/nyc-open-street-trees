@@ -16,6 +16,8 @@ type TreeController (logger : ILogger<TreeController>) =
  
     let jsonOptions = JsonSerializerOptions(PropertyNamingPolicy = JsonNamingPolicy.CamelCase)
 
+    // TODO: encapsulate database connection logic in a separate service and use dependency injection
+    // TODO: check optimal SQL performance (connection pooling, query performance, etc.)
     let openConnection () =
         let connection = new SQLiteConnection(Loader.connectionString)
         connection.Open()
@@ -33,11 +35,19 @@ type TreeController (logger : ILogger<TreeController>) =
         task {
             let connection = openConnection()
             let parameters = { tree_id = id }
+            // Use an ORM (Dapper?) to avoid writing raw SQL queries
             let query = "SELECT * FROM Trees WHERE tree_id = @tree_id"
             let tree = connection.QueryFirstOrDefault<Tree>(query, parameters)
             return JsonSerializer.Serialize(tree, jsonOptions)
         }
 
+    // TODO: Add POST, PUT, DELETE actions for CRUD operations
+    // Update, patch and creation operations should trigger tasks for to re-compute data
+    // in the staging tables and update the cache (e.g. health summary below)
+
+    // TODO: Ensure proper RESTful principles are followed for the API design
+    // TODO: input validation and error handling
+    // TODO: versioning and proper documentation
     [<HttpGet>]
     member _.GetTrees (
         [<FromQuery>] species: string option,
@@ -54,7 +64,7 @@ type TreeController (logger : ILogger<TreeController>) =
             // Initialize connection
             use connection = openConnection()
 
-            // Start building the SQL query and parameters dynamically
+            // TODO: Start building the SQL query and parameters dynamically
             let baseQuery = StringBuilder("SELECT * FROM Trees WHERE 1=1")
             let parameters = DynamicParameters()
 
@@ -87,6 +97,7 @@ type TreeController (logger : ILogger<TreeController>) =
             let queryResult = connection.Query<Tree>(baseQuery.ToString(), parameters)
 
             // Serialize and return the result
+            // TODO: check proper controller action that should serialize the result
             let serializedResult = JsonSerializer.Serialize(queryResult, jsonOptions)
             return serializedResult
         }
@@ -95,7 +106,9 @@ type TreeController (logger : ILogger<TreeController>) =
     member _.GetHealthSummary ([<FromQuery>] groupBy: string option) =
         task {
             use connection = openConnection()
-
+            
+            // TODO: Start building the SQL query and parameters dynamically
+            // Result can be cached and re-computed in a background task on update operations
             let baseQuery = 
                 match groupBy with
                 | Some "boroname" -> "SELECT boroname, health, COUNT(*) AS count FROM Trees GROUP BY boroname, health"
@@ -110,7 +123,8 @@ type TreeController (logger : ILogger<TreeController>) =
     member _.GetSpecies () =
         task {
             use connection = openConnection()
-
+            
+            // TODO: Start building the SQL query and parameters dynamically
             let query = "SELECT DISTINCT spc_latin, spc_common FROM Trees"
 
             let result = connection.Query(query)

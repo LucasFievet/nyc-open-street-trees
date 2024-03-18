@@ -4,6 +4,7 @@ type TreeId = {
    tree_id: int64
 }
 
+// TODO: ORM mapper convention to decouple database column names from property names
 type Tree = {
     created_at: string
     tree_id: int64

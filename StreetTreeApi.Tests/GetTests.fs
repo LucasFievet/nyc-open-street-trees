@@ -4,6 +4,9 @@ open Xunit
 open Xunit.Abstractions
 open StreetTreeApi.Controllers
 
+
+// TODO: propoer dependency injection setup for unit tests with mocks where needed
+
 type ``OpenStreetTreeController`` (output: ITestOutputHelper) =
     // Store the output helper in a field
     let output = output
@@ -22,6 +25,7 @@ type ``OpenStreetTreeController`` (output: ITestOutputHelper) =
         Assert.NotNull(result)
         output.WriteLine(sprintf "Result: %A" result)
         // Deserialize the result and assert on the properties
+        // TODO: better assertions for the summary data
 
     // Example test for GetTrees
     [<Fact>]
@@ -49,3 +53,4 @@ type ``OpenStreetTreeController`` (output: ITestOutputHelper) =
         Assert.NotNull(result)
         output.WriteLine(sprintf "Result: %s" result)
         // Deserialize the result and assert on the properties
+        // TODO: better assertions for the summary data
